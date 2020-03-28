@@ -154,7 +154,7 @@ impl Authenticator for PasswordAuthenticator {
         } else {
             let mut buf = String::new();
             result.read_to_string(&mut buf).unwrap();
-            let token_response: TokenResponse = serde_json::from_str(&buf).unwrap();
+            let token_response: TokenResponse = serde_json::from_str(&buf)?;
             self.access_token = Some(token_response.access_token);
             Ok(())
         }
