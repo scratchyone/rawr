@@ -72,7 +72,7 @@ impl RedditClient {
             client: client,
             user_agent: user_agent.to_owned(),
             authenticator: authenticator,
-            auto_logout: true,
+            auto_logout: false,
         };
 
         this.get_authenticator()
