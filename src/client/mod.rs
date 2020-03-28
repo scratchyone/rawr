@@ -77,7 +77,7 @@ impl RedditClient {
 
         this.get_authenticator()
             .login(&this.client, &this.user_agent)?;
-        this
+        Ok(this)
     }
 
     /// Disables the automatic logout that occurs when the client drops out of scope.
