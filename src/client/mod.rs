@@ -61,7 +61,7 @@ impl RedditClient {
     /// Creates an instance of the `RedditClient` using the provided user agent.
     pub fn new(user_agent: &str,
                authenticator: Arc<Mutex<Box<Authenticator + Send>>>)
-               -> RedditClient {
+               -> Result<RedditClient,APIError> {
         // Connection pooling is problematic if there are pauses/sleeps in the program, so we
         // choose to disable it by using a non-pooling connector.
         let ssl = NativeTlsClient::new().expect("Failed to acquire TLS client");
@@ -76,8 +76,7 @@ impl RedditClient {
         };
 
         this.get_authenticator()
-            .login(&this.client, &this.user_agent)
-            .expect("Authentication failed. Did you use the correct username/password?");
+            .login(&this.client, &this.user_agent)?;
         this
     }
 
